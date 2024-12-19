@@ -305,7 +305,7 @@ float dll::HERO::GetXAxisMove(float gear) const
 	if (dir == dirs::right)return -(speed + gear / 10);
 	return speed + gear / 10;
 }
-char dll::HERO::Move(float gear, float dest_x, float dest_y, PROT_MESH platforms)
+char dll::HERO::Move(float gear, float dest_x, float dest_y, PROT_MESH& platforms)
 {
 	if (CheckMoveFlag(jump_up_flag) || CheckMoveFlag(jump_down_flag))return move_flag;
 
@@ -325,7 +325,7 @@ char dll::HERO::Move(float gear, float dest_x, float dest_y, PROT_MESH platforms
 
 	return move_flag;
 }
-char dll::HERO::Jump(float gear, PROT_MESH platforms)
+char dll::HERO::Jump(float gear, PROT_MESH& platforms)
 {
 	if (!CheckMoveFlag(jump_up_flag) && !CheckMoveFlag(jump_down_flag))
 	{
@@ -379,7 +379,7 @@ char dll::HERO::Jump(float gear, PROT_MESH platforms)
 			{
 				for (int i = 0; i < platforms.size(); i++)
 				{
-					if (!(x > platforms[i].ex || ex<platforms[i].x || x>platforms[i].ex || ex < platforms[i].x))
+					if (!(x > platforms[i].ex || ex<platforms[i].x || y>platforms[i].ey || ey < platforms[i].y))
 					{
 						y = platforms[i].y - height;
 						SetEdges();
@@ -393,7 +393,7 @@ char dll::HERO::Jump(float gear, PROT_MESH platforms)
 
 	return move_flag;
 }
-char dll::HERO::Fall(float gear, PROT_MESH platforms)
+char dll::HERO::Fall(float gear, PROT_MESH& platforms)
 {
 	float my_speed = speed + gear / 10;
 
@@ -435,7 +435,7 @@ float dll::EVIL::GetXAxisMove(float gear) const
 {
 	return 0;
 }
-char dll::EVIL::Move(float gear, float dest_x, float dest_y, PROT_MESH platforms)
+char dll::EVIL::Move(float gear, float dest_x, float dest_y, PROT_MESH& platforms)
 {
 	move_flag = 0;
 
@@ -481,7 +481,7 @@ char dll::EVIL::Move(float gear, float dest_x, float dest_y, PROT_MESH platforms
 
 	return move_flag;
 }
-char dll::EVIL::Jump(float gear, PROT_MESH platforms)
+char dll::EVIL::Jump(float gear, PROT_MESH& platforms)
 {
 	float my_speed = speed + gear / 10;
 
@@ -596,7 +596,7 @@ char dll::EVIL::Jump(float gear, PROT_MESH platforms)
 	}
 	return move_flag;
 }
-char dll::EVIL::Fall(float gear, PROT_MESH platforms)
+char dll::EVIL::Fall(float gear, PROT_MESH& platforms)
 {
 	float my_speed = speed + gear / 10;
 
